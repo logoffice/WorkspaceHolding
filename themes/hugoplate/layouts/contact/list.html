@@ -1,0 +1,110 @@
+{{ define "main" }}
+{{ partial "page-header" . }}
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="md:col-10 lg:col-6 mx-auto">
+        <form action="{{ site.Params.contact_form_action }}" method="POST">
+          <!-- Full Name -->
+          <div class="mb-6">
+            <label for="name" class="form-label">
+              Full Name <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="name"
+              name="name"
+              class="form-input"
+              placeholder="John Doe"
+              type="text"
+              required />
+          </div>
+
+          <!-- Email -->
+          <div class="mb-6">
+            <label for="email" class="form-label">
+              Working Email <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="john.doe@email.com"
+              type="email"
+              required />
+          </div>
+
+          <!-- Phone Number (Required for TCR) -->
+          <div class="mb-6">
+            <label for="phone" class="form-label">
+              Mobile Number <span class="text-red-500">*</span>
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              class="form-input"
+              placeholder="+1 (555) 123-4567"
+              type="tel"
+              pattern="\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}"
+              required />
+          </div>
+
+          <!-- Message -->
+          <div class="mb-6">
+            <label for="message" class="form-label">
+              Additional Information
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-input"
+              placeholder="Message goes here..."
+              rows="6"></textarea>
+          </div>
+
+          <!-- Explicit Consent (TCR Requirement) -->
+          <div class="mb-6">
+            <label class="form-label">
+              <input type="checkbox" id="optin" name="optin" required />
+              I agree to receive SMS notifications regarding my inquiry.
+              Message frequency may vary. Reply STOP to opt-out. Message & data rates may apply.
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Terms and Privacy Policy -->
+        <p class="text-sm text-gray-500 mt-4">
+          By submitting this form, you agree to our
+          <a href="/privacy-policy" class="text-blue-500 underline">Privacy Policy</a>.
+        </p>
+
+        <div class="mt-6">
+          <br> WORKSPACE HOLDING LLC </br>
+          Address: 740 H Dell Range BLvd, suite 281, Cheyenne, WY, 82009 <br>
+          Phone: +1(307)289-4350 <br>
+          E-mail: office@workspacellc.us
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Google Map (Optional) -->
+{{ with site.Params.google_map }}
+{{ if .enable }}
+<div id="map" style="height: 400px;"
+     data-latitude="{{ .map_latitude }}"
+     data-longitude="{{ .map_longitude }}"
+     data-marker="{{ .map_marker | relURL }}"
+     data-marker-name="{{ site.Title }}">
+</div>
+{{ end }}
+{{ end }}
+
+{{ end }}
